@@ -371,6 +371,12 @@
     border-radius:2px;padding:8px 10px;margin:4px 0 2px}
   .namefield .fk{color:#5c2018;font-weight:700;letter-spacing:.06em}
   .namenote{font:12.5px/1.55 Georgia,serif;color:#4a4234;margin:5px 2px 12px;font-style:italic}
+  .codebox{margin-top:16px;padding-top:12px;border-top:1px dashed rgba(30,58,95,.28)}
+  .codefield{background:rgba(30,58,95,.06);border:1px solid rgba(30,58,95,.22);
+    border-radius:2px;padding:8px 10px;margin:4px 0 2px}
+  .codefield .fk{color:#1d3a5f;font-weight:700;letter-spacing:.06em}
+  .codefield .formfield{font-family:ui-monospace,Menlo,monospace;font-size:15px;
+    letter-spacing:.12em;text-transform:uppercase}
   .plate .claims{margin-top:7px}
   .plate .claims .lab{color:#3b2e10}
   .plate .ribbons{margin-top:6px}
@@ -666,6 +672,35 @@
   .presssub{display:block;font-size:13px;color:#4a3d24;margin-top:3px;font-style:italic}
   /* A band, not a picture. Short enough that the report is still the thing on
      the screen, wide enough to be worth looking at. */
+  /* A cork board with the jobs pinned to it. */
+  .modboard{background:linear-gradient(180deg,#5a4326,#4a3620);
+    border:1px solid #6d5232;box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
+  .modboard .chalkhead{color:#f0dcb4}
+  .jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;
+    padding:4px 2px 2px}
+  .job{position:relative;background:#efe6cf;color:#2a2416;border-radius:1px;
+    padding:16px 12px 11px;box-shadow:0 3px 7px rgba(0,0,0,.42);
+    font-family:Georgia,'Times New Roman',serif}
+  .job.j0{transform:rotate(-1.1deg)} .job.j1{transform:rotate(.8deg)}
+  .job.j2{transform:rotate(1.4deg)}  .job.j3{transform:rotate(-.6deg)}
+  .job .pin{position:absolute;top:5px;left:50%;margin-left:-5px;width:10px;height:10px;
+    border-radius:50%;background:radial-gradient(circle at 35% 32%,#e8705c,#8e2f22);
+    box-shadow:0 1px 2px rgba(0,0,0,.5)}
+  .job b{display:block;font-weight:700;font-size:14px;line-height:1.3;margin-bottom:4px}
+  .job .jw,.job .jd{display:block;font:9.5px/1.6 "Courier New",monospace;letter-spacing:.1em;
+    text-transform:uppercase;color:#6b6047}
+  .job .jn{margin:6px 0 0;font-size:12px;font-style:italic;color:#4a4232;line-height:1.45}
+  .daynews .plot{margin:0 0 7px}
+  .daynews .plot:last-child{margin-bottom:0}
+  .camptab{width:100%;border-collapse:collapse;margin:6px 0 8px;font-size:13px}
+  .camptab td{padding:6px 8px;border-bottom:1px solid rgba(226,214,186,.13);
+    vertical-align:top;color:var(--chalk,#dfe6ef)}
+  .camptab td b{font-weight:600;color:#fff}
+  .camptab .pl{width:2.2em;color:#8fa6c2}
+  .camptab .gr{display:block;font:9.5px/1.5 "Courier New",monospace;letter-spacing:.1em;
+    text-transform:uppercase;color:#8fa6c2;margin-top:2px}
+  .camptab .nowrow td{background:rgba(240,185,92,.10)}
+  .camptab .nowrow td b{color:#ffd98a}
   .trainlbl{margin:9px 0 4px;color:#f0b95c;font:10px/1.6 "Courier New",monospace;
     letter-spacing:.18em;text-transform:uppercase}
   .evwrap{padding:0;overflow:hidden;border:1px solid rgba(184,146,74,.28);
@@ -923,7 +958,7 @@ const BADGES = {
   '616': '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',
 };
 
-const BUILD = '14 Aug \u00b7 07';
+const BUILD = '14 Aug \u00b7 11';
 
 const BALANCE = {
   // How claims are assessed, as the RAF actually assessed them: the man who did
@@ -2383,7 +2418,8 @@ const Season = {
   },
 
   start(seed){
-    Rand = makeRand(seed || Date.now());
+    const used = (seed || ((Date.now() ^ (Math.random() * 1e9)) >>> 0)) >>> 0;
+    Rand = makeRand(used);
     NameBook.reset();
     const C = CAMPAIGN;
     const pilots = [];
@@ -2412,6 +2448,8 @@ const Season = {
     Season.s = {
       date: new Date(Date.UTC(C.start.y, C.start.m, C.start.d)),
       day: 1, week: 1,
+      // Kept so a campaign can be filed, compared and handed on.
+      seed: used, startedAt: Date.now(), filed: false,
       stationId: C.squadron.home, restDays: 0,
       standing: C.command.standingStart, groundCrewFatigue: 0,
       pilots, roll: pilots.slice(), aircraft,
@@ -3504,7 +3542,11 @@ const Season = {
   // Two ways this ends: the battle is won, or the squadron is finished.
   checkEnding(){
     const s = Season.s;
-    if (s.over) return true;
+    if (s.over){
+      // Set it down in the table. Safe to call again: it files once.
+      if (!s.filed) Records.file();
+      return true;
+    }
     const [em, ed] = CAMPAIGN.battleEnds.split('-').map(Number);
     const endsOn = Date.UTC(CAMPAIGN.start.y, em - 1, ed);
     const pilots = Season.activePilots().length;
@@ -5269,6 +5311,10 @@ const INCIDENTS = [
           const u = c.up;
           s.upgrades = s.upgrades || {};
           s.upgrades[u.id] = true;
+          // When it was done and how many aircraft went through the shop, so
+          // the board can read as a record of work rather than a list of buffs.
+          s.upgradeLog = s.upgradeLog || {};
+          s.upgradeLog[u.id] = { on: Season.dateLabel(), day: s.day };
           const serv = Season.serviceable();
           // The offer was made this morning; by now the squadron may have fewer
           // aircraft than it had. Never ground more than are actually there.
@@ -5614,6 +5660,7 @@ const Save = {
       date: s.date.toISOString(),
       day: s.day, week: s.week, stationId: s.stationId, restDays: s.restDays,
       standing: s.standing, groundCrewFatigue: s.groundCrewFatigue,
+      seed: s.seed, startedAt: s.startedAt, filed: !!s.filed,
       roll: s.roll,                                   // the master pilot record
       pilotIds: s.pilots.map(p => p.id),              // who is still on strength
       aircraft: s.aircraft,
@@ -5681,6 +5728,7 @@ const Save = {
       date: new Date(d.date), day: d.day, week: d.week,
       stationId: d.stationId, restDays: d.restDays,
       standing: d.standing, groundCrewFatigue: d.groundCrewFatigue,
+      seed: d.seed || 0, startedAt: d.startedAt || 0, filed: !!d.filed,
       roll: d.roll,
       pilots: d.pilotIds.map(id => byId.get(id)).filter(Boolean),
       aircraft: d.aircraft,
@@ -7066,18 +7114,31 @@ const Sim = {
       if (!Sim.live(a) || a.homing || a.role === 'bomber') continue;
       const sec = Sim.secOf(st, a);
       const up = sec ? Sim.secUp(sec) : 3;
+
+      // A man committed to an attack does not turn round in the middle of it.
+      // Measured: 93 of 168 men who went home did so on their firing run, most
+      // of them for no reason but the clock, which is why attacks were never
+      // being pressed. Only running dry or being badly hit stops a run.
+      const attacking = (a.phase === 'run' || a.phase === 'setup') &&
+                        !(a.ammo <= 0.3) && !a.hurt;
+      if (attacking) continue;
+
       let leave = 0;
       if (a.ammo <= 0.3)            leave += 0.45;
       if (a.hurt)                   leave += 0.40;
       if (a.hurt && a.side !== st.homeSide) leave += 0.35;   // and a long way to go
       if (a.alt < 22 && a.spd < 45) leave += 0.25;
       if (up <= 1)                  leave += 0.22;
-      if (a.hits > 0.6)             leave += 0.12;
+      // One strike is a hole in the wing, not a reason to leave. It takes a
+      // proper hammering before a man thinks about home.
+      if (a.hits > 1.6)             leave += 0.12;
       // Nerve is what decides how long a man stays in something he is losing.
       leave *= clamp(1.7 - a.nerve / 70, 0.35, 1.8);
-      if (st.t > 90) leave += (st.t - 90) / 340;     // having had enough
+      // Endurance. This used to start at ninety seconds and rise fast enough
+      // that everybody drifted off in the second half of every action.
+      if (st.t > 165) leave += (st.t - 165) / 900;
       // The Luftwaffe fighters are on a fuel clock the moment they cross.
-      if (a.side === 'lw' && st.t > 140) leave += (st.t - 140) / 90;
+      if (a.side === 'lw' && st.t > 150) leave += (st.t - 150) / 150;
       if (leave > 0 && st.rng() < leave * 0.55){
         a.homing = true; a.target = null; a.phase = null;
         if (a.side === st.side)
@@ -7186,6 +7247,8 @@ const Sim = {
       st.log('rt', `<b>${a.call}</b> — staying with him.`);
       setTimeoutSim(st, 3.0, () => { if (Sim.live(a)) a.hitMod = (a.hitMod || 1) / 1.35; });
     } else if (act === 'home'){
+      // Not in the middle of a run. He finishes the attack, then goes.
+      if (a.phase === 'run' && a.ammo > 0.3 && !a.hurt) return;
       a.homing = true; a.target = null;
       st.log('rt', `<b>${a.call}</b> — breaking off and going home.`);
     }
@@ -7234,6 +7297,7 @@ const Sim = {
         if (!Sim.live(a) || a.homing || a.side !== st.side || a.role === 'bomber') continue;
         const near = st.air.some(o => Sim.live(o) && o.side !== a.side &&
           Math.hypot(o.x - a.x, o.y - a.y) < 260);
+        if (a.phase === 'run' || a.phase === 'setup') continue;   // let him finish
         if (!near && st.rng() < 0.02){
           a.homing = true; a.target = null; a.phase = null;
           st.log('rt', `${a.call} — nothing left up here. Going home.`);
@@ -7623,7 +7687,11 @@ const UI = {
     if (Season.s.awaitingSetup) return UI.startScreen(el);
     if (UI.tab === 'ops')    UI.ops(el);
     else if (UI.tab === 'pilots') UI.pilots(el);
-    else if (UI.tab === 'records') UI.records(el);
+    else if (UI.tab === 'records'){
+      // The table lives beside the save, so it is fetched once and then kept.
+      if (!Records.rows) Records.load().then(() => UI.render());
+      UI.records(el);
+    }
     else if (UI.tab === 'diary')  UI.diary(el);
     else if (UI.tab === 'roll')   UI.roll(el);
     UI.footer(el);
@@ -8085,8 +8153,10 @@ const UI = {
     } else if (s.calls.length){
       html += `<div class="panel quietday">All calls answered. ${s.weather.note}</div>`;
     } else {
-      html += `<div class="panel quietday">${s.dayLines[0] || s.weather.note}</div>`;
+      html += `<div class="panel quietday">${s.weather.note}</div>`;
     }
+
+    html += UI.dayNews();
 
     if (!s.pending && !s.incident && !s.recommendation && !s.battle){
       const ex = s.trainingChoice ? CAMPAIGN.training.types.find(t => t.id === s.trainingChoice) : null;
@@ -8910,6 +8980,16 @@ const UI = {
           </div>
 
           <div class="btnrow" id="startrow"></div>
+
+          <div class="codebox">
+            <div class="ff codefield"><span class="fk">Campaign code</span>
+              <span class="fv"><input id="seedcode" class="formfield"
+                placeholder="optional"></span></div>
+            <p class="namenote" style="margin-bottom:0">If somebody has given you a code
+              from their records, put it in before taking command and you will fly the
+              campaign they flew \u2014 the same weather, the same calls, the same men.
+              Leave it empty for a new one.</p>
+          </div>
         </div>
       </div>`;
 
@@ -8938,7 +9018,10 @@ const UI = {
       const box = document.getElementById('cmdname');
       const name = (box && box.value.trim()) ||
         (UI.choice.side === 'lw' ? 'W. Bergmann' : 'J. Marlowe');
-      Season.begin({ ...UI.choice, commander: name });
+      const cbox = document.getElementById('seedcode');
+      const code = cbox && Records.readCode(cbox.value);
+      // begin() takes the seed as its second argument, not as part of the setup.
+      Season.begin({ ...UI.choice, commander: name }, code ? code.seed : null);
       UI.tab = 'ops'; UI.render();
     };
     row.appendChild(go);
@@ -9005,6 +9088,8 @@ const UI = {
   ending(el){
     const r = Season.finalReport();
     const s = Season.s;
+    if (!Records.rows) Records.load().then(() => UI.render());
+    else if (!s.filed) Records.file().then(() => UI.render());
     const line = (k,v) => `<div class="ff"><span class="fk">${k}</span><span class="fv">${v}</span></div>`;
     const men = list => list.length
       ? list.map(p => `${Pilot.name(p)}${p.awards.length ? ' ' + p.awards.join(', ') : ''}`).join(' · ')
@@ -9181,6 +9266,106 @@ const UI = {
   },
 
   /* -------------------------------------------------------------- records */
+  /* The work the fitters have done, pinned up in the flight office. Only what
+     has actually been done to the aeroplanes: a modification nobody has been
+     offered yet has no business being on this board, and finding one waiting
+     for you is half the pleasure of it. */
+  modBoard(){
+    const s = Season.s;
+    const done = s.upgrades || {};
+    const log = s.upgradeLog || {};
+    const list = (CAMPAIGN.upgrades || []).filter(u => done[u.id]);
+
+    // Harmonisation is not an upgrade in the table but it is a job the
+    // armourers did, and the squadron argued about it for weeks.
+    const cards = list.map(u => ({
+      name: u.name, note: u.note || '',
+      when: (log[u.id] && log[u.id].on) || '',
+      days: u.takes ? (u.takes === 1 ? 'one day an aircraft' : u.takes + ' days an aircraft') : ''
+    }));
+    if (s.harmonisation === 'close_250')
+      cards.push({ name:'Guns harmonised to 250 yards', when:'',
+        note:'Against orders, and the pilots wanted it.',
+        days:'an afternoon on the butts' });
+
+    const nowt = `<p class="chalk chalkdim">Nothing yet. The fitters have done no more
+      than keep them flying \u2014 which is most of the work, and none of the glory.
+      Anything the squadron takes on will be pinned up here.</p>`;
+
+    return `<div class="board modboard"><h3 class="chalkhead">The flight office board</h3>` +
+      (cards.length
+        ? `<div class="jobs">${cards.map((c,i) => `
+            <div class="job j${i % 4}">
+              <span class="pin"></span>
+              <b>${c.name}</b>
+              ${c.when ? `<span class="jw">Completed ${c.when}</span>` : ''}
+              ${c.days ? `<span class="jd">${c.days}</span>` : ''}
+              ${c.note ? `<p class="jn">${c.note}</p>` : ''}
+            </div>`).join('')}</div>`
+        : nowt) + `</div>`;
+  },
+
+  /* The day's business, in full, on the page the player is actually on. The
+     R/T and the combat narrative are left out because the report above says
+     them better; what is left is the squadron's own news. */
+  dayNews(){
+    const s = Season.s;
+    const lines = (s.dayLines || []).filter(l => l && !/^From the R\/T:/.test(l));
+    if (!lines.length) return '';
+    // Anything the combat report has already told him is not news twice over.
+    const shown = s.report ? Season.diaryLineFor(s.report) : null;
+    const rest = lines.filter(l => l !== shown);
+    if (!rest.length) return '';
+    return `<div class="panel daynews"><div class="when">Today</div>` +
+      rest.map(l => `<p class="plot">${l}</p>`).join('') + `</div>`;
+  },
+
+  /* Every campaign you have finished, best first. This is how a player finds
+     out whether this one is going better than the last. */
+  campaignTable(){
+    const rows = Records.rows || [];
+    const card = Season.scoreCard();
+    const live = Season.s.over ? null : card.total;
+    const st = live != null ? Records.standing(live) : null;
+
+    if (!rows.length && live == null) return '';
+    const head = `<div class="board"><h3 class="chalkhead">Campaigns</h3>`;
+    if (!rows.length)
+      return head + `<p class="chalk chalkdim">This is your first. Finish it and it will
+        be set down here, with its seed, so you can try the same one again.</p>` +
+        (st ? '' : `<p class="chalk">Running total: <b>${card.total}</b> \u2014 ${card.grade}.</p>`) +
+        `</div>`;
+
+    const line = (r, i, now) => {
+      const code = now ? '' : Records.code(r);
+      const ended = r.ended === 'won' ? 'Saw it through'
+                  : r.ended === 'collapsed' ? 'Withdrawn from the line' : 'Posted away';
+      return `<tr class="${now ? 'nowrow' : ''}">
+        <td class="pl">${now ? '\u2014' : i}</td>
+        <td><b>${r.score}</b><span class="gr">${r.grade}</span></td>
+        <td>${r.side === 'lw' ? 'Luftwaffe' : 'R.A.F.'}<span class="gr">${
+          now ? 'this campaign, so far' : ended}</span></td>
+        <td>${r.claims}<span class="gr">claimed</span></td>
+        <td>${r.losses}<span class="gr">lost</span></td>
+        <td>${now ? '' : r.lastDate}<span class="gr">${code}</span></td></tr>`;
+    };
+
+    const nowRow = live == null ? '' : line({
+      score: card.total, grade: card.grade, side: Season.s.side || 'raf',
+      claims: Season.s.tally.claims, losses: Season.s.tally.losses,
+      lastDate: '', ended: '' }, 0, true);
+
+    return head +
+      (st ? `<p class="chalk">As it stands you would come <b>${st.place}</b> of ${st.of}.
+             Your best is <b>${st.best}</b>.</p>` : '') +
+      `<table class="camptab"><tbody>${nowRow}${
+        rows.map((r,i) => line(r, i+1, false)).join('')}</tbody></table>
+       <p class="chalk chalkdim">The code after each is its seed and score. Start a new
+         campaign with the same seed and you get the same weather, the same calls and the
+         same men \u2014 which is the only fair way to compare two runs, or to hand one
+         to somebody else.</p></div>`;
+  },
+
   records(el){
     const s = Season.s;
     const all = s.roll.slice();
@@ -9202,6 +9387,8 @@ const UI = {
     };
 
     el.innerHTML = `<h2>Squadron records</h2>
+      ${UI.modBoard()}
+      ${UI.campaignTable()}
       <div class="panel">
         <div class="strength" style="margin:0;justify-content:flex-start">
           <span>Destroyed <b>${s.tally.claims}</b></span>
@@ -10853,6 +11040,110 @@ Season.pictureHtml = function(code, caption){
   const band = (a.w / a.h) >= 3 ? ' class="band"' : '';
   return `<figure class="evpic"><img${band} src="${a.d}" alt="" loading="lazy">` +
          (caption ? `<figcaption>${caption}</figcaption>` : '') + `</figure>`;
+};
+
+
+/* ==========================================================================
+   THE RECORDS
+   Every finished campaign leaves a line here, kept beside the save and never
+   overwritten by it. It is how you find out whether this one went better than
+   the last one, which is the only comparison that matters when there is
+   nobody else to play against.
+
+   Each row carries its seed, so a campaign can be handed to somebody else --
+   or attempted again -- under exactly the conditions that produced it.
+   ========================================================================== */
+const RECORDS_KEY = 'squadron-leader-records-v1';
+
+const Records = {
+  rows: null,          // loaded lazily; null means not read yet
+  MAX: 40,
+
+  async load(){
+    if (Records.rows) return Records.rows;
+    try {
+      const raw = await Store.get(RECORDS_KEY);
+      Records.rows = raw ? JSON.parse(raw) : [];
+    } catch(e){ Records.rows = []; }
+    if (!Array.isArray(Records.rows)) Records.rows = [];
+    return Records.rows;
+  },
+
+  async save(){
+    try { await Store.set(RECORDS_KEY, JSON.stringify(Records.rows || [])); }
+    catch(e){ /* a table that cannot be written is not worth an error */ }
+  },
+
+  /* Called once when a campaign ends. Idempotent: a campaign that has already
+     been filed does not get filed twice on a reload. */
+  async file(){
+    const s = Season.s;
+    if (!s || !s.over || s.filed) return null;
+    s.filed = true;
+    await Records.load();
+    const card = Season.scoreCard();
+    const t = s.tally;
+    const row = {
+      id: (s.seed || 0) + '-' + (s.startedAt || 0),
+      when: Date.now(),
+      side: s.side || 'raf',
+      squadron: (Side.cur && Side.cur.squadronName) ? Side.cur.squadronName
+                : (CAMPAIGN.squadron.name || 'Squadron'),
+      commander: s.commander || '',
+      seed: s.seed || 0,
+      ended: s.over,                       // 'won' | 'collapsed' | 'posted'
+      lastDate: Season.dateLabel ? Season.dateLabel() : '',
+      days: s.day || 0,
+      score: card.total,
+      grade: card.grade,
+      claims: t.claims || 0,
+      shared: t.shared || 0,
+      damaged: t.damaged || 0,
+      losses: t.losses || 0,
+      aircraft: t.aircraftLost || 0,
+      stopped: t.raidsStopped || 0,
+      through: t.raidsThrough || 0,
+      sorties: t.sorties || 0,
+      best: Records.topScorer(s)
+    };
+    if (!Records.rows.some(r => r.id === row.id)){
+      Records.rows.push(row);
+      Records.rows.sort((a,b) => b.score - a.score);
+      if (Records.rows.length > Records.MAX) Records.rows.length = Records.MAX;
+      await Records.save();
+    }
+    return row;
+  },
+
+  topScorer(s){
+    const all = (s.roll || []).concat(Season.activePilots ? Season.activePilots() : []);
+    let best = null;
+    for (const p of all) if (!best || (p.kills || 0) > (best.kills || 0)) best = p;
+    return best && best.kills ? { name: Pilot.name(best), kills: best.kills } : null;
+  },
+
+  /* Where this campaign stands against the others, while it is still running. */
+  standing(score){
+    const rows = Records.rows || [];
+    if (!rows.length) return null;
+    const better = rows.filter(r => r.score > score).length;
+    return { place: better + 1, of: rows.length + 1, best: rows[0].score };
+  },
+
+  /* A short code that carries the seed and the score, so one player can hand a
+     campaign to another: same weather, same calls, same men. */
+  code(row){
+    const side = row.side === 'lw' ? 'L' : 'R';
+    return (side + (row.seed || 0).toString(36) + '-' + Math.max(0, row.score).toString(36))
+      .toUpperCase();
+  },
+
+  readCode(str){
+    const m = /^([RL])([0-9A-Z]+)-([0-9A-Z]+)$/i.exec((str || '').trim());
+    if (!m) return null;
+    return { side: m[1].toUpperCase() === 'L' ? 'lw' : 'raf',
+             seed: parseInt(m[2], 36), score: parseInt(m[3], 36) };
+  }
 };
 
 const PRESS = {
