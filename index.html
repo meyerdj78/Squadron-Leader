@@ -432,6 +432,13 @@
   .campcard .cgo{margin-top:10px;font:10px/1.6 "Courier New",monospace;letter-spacing:.18em;
     text-transform:uppercase;color:#5fe08f}
   .panel.asking{border-color:#D2A85C;box-shadow:0 0 0 1px rgba(210,168,92,.22)}
+  .briefin{max-width:560px}
+  .brieftaken{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+  .brieftaken span{font:11px/1.5 "Courier New",monospace;letter-spacing:.08em;
+    color:#17202f;background:#D2A85C;border-radius:2px;padding:3px 8px}
+  .bcost{display:block;margin-top:5px;font:9.5px/1.6 "Courier New",monospace;
+    letter-spacing:.16em;text-transform:uppercase;color:#f0b95c;font-style:normal}
+  .briefgo{background:rgba(210,168,92,.18) !important;border-color:#D2A85C !important}
   .campcode{margin-top:14px;text-align:right}
   .devcodebox{font:11px/1.6 ui-monospace,Menlo,monospace;letter-spacing:.16em;
     text-transform:uppercase;background:rgba(20,30,48,.6);border:1px solid #33465f;
@@ -1040,7 +1047,7 @@ const BADGES = {
   '616': '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',
 };
 
-const BUILD = '29 Aug \u00b7 01';
+const BUILD = '29 Aug \u00b7 05';
 
 const BALANCE = {
   // How claims are assessed, as the RAF actually assessed them: the man who did
@@ -1099,6 +1106,13 @@ function makeRand(seed){
 }
 let Rand = makeRand(Date.now());
 const clamp = (v,a,b) => Math.max(a, Math.min(b,v));
+
+/* Counting. '1 sorties' turned up in half a dozen places because the plural was
+   part of the sentence rather than a decision. This makes it a decision. */
+const plural = (n, one, many) => {
+  n = Math.round(Number(n) || 0);
+  return n + ' ' + (Math.abs(n) === 1 ? one : (many || one + 's'));
+};
 
 /* ============================================================================
    PART 2 — GEOGRAPHY. Real stations, real sectors, real patrol lines.
@@ -1379,9 +1393,9 @@ const CAMPAIGN = {
   // a single straggler under tow draws something more like a hunt.
   convoyKinds: [
     { id:'coastal', weight:32, bias:1.00,
-      line:c => `Convoy <b>${c.convoy}</b>, ${c.ships} ships and their escort, is passing ${c.place}.` },
+      line:c => `Convoy <b>${c.convoy}</b>, ${plural(c.ships, 'ship', 'ships')} and their escort, is passing ${c.place}.` },
     { id:'large', weight:18, bias:1.25,
-      line:c => `A large east-coast convoy, <b>${c.convoy}</b>, ${c.ships} ships, is off ${c.place}. ` +
+      line:c => `A large east-coast convoy, <b>${c.convoy}</b>, ${plural(c.ships, 'ship', 'ships')}, is off ${c.place}. ` +
                 `Sector expects it to be attacked.` },
     { id:'lone', weight:17, bias:0.65,
       line:c => `A lone ${c.ship} has straggled from <b>${c.convoy}</b> and is making her own way past ${c.place}.` },
@@ -1616,11 +1630,11 @@ const CAMPAIGN = {
     start: 68,
     // What the summer does to Fighter Command whatever you do. Positive is
     // pressure on Dowding, and it is at its worst over the airfields.
-    drain: { 'Channel convoys': 0.10, 'Kanalkampf': 0.30, 'Adlerangriff': 1.35,
-             'The attack on the airfields': 1.85, 'London': 0.30,
-             'The tapering off': -0.55 },
-    perRaidStopped: 1.5,      // what your squadron is worth on a good day
-    perRaidThrough: -1.1,
+    drain: { 'Channel convoys': 0.08, 'Kanalkampf': 0.24, 'Adlerangriff': 1.12,
+             'The attack on the airfields': 1.52, 'London': 0.24,
+             'The tapering off': -0.62 },
+    perRaidStopped: 1.9,      // what your squadron is worth on a good day
+    perRaidThrough: -0.95,
     perClaim: 0.10,
     perOwnLoss: -0.55,
     perStationHit: -1.6,
@@ -2529,7 +2543,7 @@ const Season = {
     Season.pushDiary([
       `<b>${CAMPAIGN.squadron.name}</b> at ${st.name}, ${st.county} — ${Season.group().name}.`,
       `${s.aircraft.length} ${BALANCE.types[CAMPAIGN.squadron.aircraft].name}s on charge, ` +
-      `${Season.activePilots().length} pilots.`,
+      `${plural(Season.activePilots().length, 'pilot', 'pilots')}.`,
       `<b>${boss ? Pilot.name(boss) : ''}</b> assumes command. <i>${sq.motto}</i>`
     ]);
     return s;
@@ -2586,7 +2600,7 @@ const Season = {
     };
     const st = Season.station();
     Season.pushDiary([`<b>${C.squadron.name}</b> at ${st.name}, ${st.county}. ` +
-      `${pilots.length} pilots and ${aircraft.length} ` +
+      `${plural(pilots.length, 'pilot', 'pilots')} and ${aircraft.length} ` +
       `${BALANCE.types[C.squadron.aircraft].short}s on charge.`]);
     Season.beginDay();
     return Season.s;
@@ -2685,7 +2699,7 @@ const Season = {
     if (s.serviceableYesterday && serv > s.serviceableYesterday){
       const n = serv - s.serviceableYesterday;
       s.notices.push({ kind:'good',
-        text: `${n} aircraft returned to serviceability overnight. ${serv} on the line this morning.` });
+        text: `${plural(n, 'aircraft', 'aircraft')} returned to serviceability overnight. ${serv} on the line this morning.` });
     }
     s.serviceableYesterday = serv;
 
@@ -2701,8 +2715,8 @@ const Season = {
     const ready = Season.readyPilots().length;
     if (ready > serv)
       s.notices.push({ kind:'warn',
-        text: `${ready} pilots at readiness but only ${serv} aircraft serviceable. ` +
-              `${ready - serv} men will be standing about.` });
+        text: `${plural(ready, 'pilot', 'pilots')} at readiness but only ${plural(serv, 'aircraft', 'aircraft')} serviceable. ` +
+              `${plural(ready - serv, 'man', 'men')} will be standing about.` });
 
     // 48-hour passes and standing-down orders expire
     for (const p of s.pilots)
@@ -2788,7 +2802,7 @@ const Season = {
       Season.trainingAccident(p, ex, lines);
     }
     if (!lines.length)
-      lines.push(`${pilots.length} aircraft up on ${ex.name.toLowerCase()}. Nothing to report.`);
+      lines.push(`${plural(pilots.length, 'aircraft', 'aircraft')} up on ${ex.name.toLowerCase()}. Nothing to report.`);
     s.dayLines.push(...lines);
     s.selected = new Set();
     return lines;
@@ -2830,7 +2844,7 @@ const Season = {
         other.morale = clamp(other.morale + CAMPAIGN.morale.comradeLost * 0.6, 0, 100);
       s.lastIncidentId = 'landing';
       lines.push(`<b>${Pilot.name(p)}</b> spun in on ${ex.name.toLowerCase()} and was killed. ` +
-        `He had ${p.hours} hours and had flown ${p.sorties} operational sorties.`);
+        `He had ${plural(p.hours, 'hour', 'hours')} and had flown ${p.sorties} operational sorties.`);
     }
   },
 
@@ -3526,11 +3540,11 @@ const Season = {
     report.stationHit = n;
     s.dayTally = s.dayTally || {};
     s.dayTally.stationHit = (s.dayTally.stationHit || 0) + 1;
-    s.dayLines.push(`<b>They bombed the station.</b> ${n} aircraft destroyed on the ground, ` +
+    s.dayLines.push(`<b>They bombed the station.</b> ${plural(n, 'aircraft', 'aircraft')} destroyed on the ground, ` +
       `the mess windows gone and craters across the flarepath. The ground crews will be ` +
       `filling them in until dark.`);
     (s.notices = s.notices || []).push({ kind:'warn',
-      text:`${Season.station().name} was bombed. ${n} aircraft destroyed on the ground.` });
+      text:`${Season.station().name} was bombed. ${plural(n, 'aircraft', 'aircraft')} destroyed on the ground.` });
   },
 
   // Whether you go up with them, over the last few calls.
@@ -3583,9 +3597,9 @@ const Season = {
                        : `convoy ${r.convoy} off ${r.place}`)
       : r.place;
     if (!r.contact)
-      return `${r.time} — ${r.up} aircraft up on ${r.type.toLowerCase()} over ${where}. ` +
+      return `${r.time} — ${plural(r.up, 'aircraft', 'aircraft')} up on ${r.type.toLowerCase()} over ${where}. ` +
         (r.sighted ? 'Enemy sighted but not engaged. ' + r.reason : 'Nothing seen.');
-    return `${r.time} — ${r.up} aircraft up over ${where}. ` +
+    return `${r.time} — ${plural(r.up, 'aircraft', 'aircraft')} up over ${where}. ` +
       (r.claims || r.shared ? `<b>${r.claims}</b> destroyed, ${r.shared} shared. ` : 'No claims. ') +
       (r.damaged ? `${r.damaged} of ours damaged.` : '');
   },
@@ -3678,7 +3692,7 @@ const Season = {
         if (!p.reported){
           p.reported = true;
           s.dayLines.push(`<b>${Pilot.name(p)}</b> ${p.status === 'killed' ? 'killed in action' : 'missing'}. ` +
-            `${p.sorties} sorties, ${p.kills} destroyed.`);
+            `${plural(p.sorties, 'sortie', 'sorties')}, ${plural(p.kills, 'destroyed', 'destroyed')}.`);
         }
         continue;
       }
@@ -3784,7 +3798,7 @@ const Season = {
       // in the game is in Kent. Then the squadron stays where it is.
       const to = GEOGRAPHY.station(CAMPAIGN.collapse.station) || Season.station();
       s.dayLines.push(`<b>${CAMPAIGN.squadron.name} is withdrawn from the line.</b> ` +
-        `With ${pilots} pilots and ${aircraft} aircraft the squadron is no longer operational. ` +
+        `With ${plural(pilots, 'pilot', 'pilots')} and ${plural(aircraft, 'aircraft', 'aircraft')} the squadron is no longer operational. ` +
         `It moves to ${to.name} to re-form, and you are posted away from it.`);
       Season.pushDiary([...s.dayLines]);
       return true;
@@ -3883,9 +3897,9 @@ const Season = {
       const n = Pilot.create(false);
       Season.assignFlight(n);
       s.pilots.push(n); s.roll.push(n);
-      s.dayLines.push(`<b>${Pilot.name(n)}</b> posted in urgently from OTU, ${n.hours} hours on type.`);
+      s.dayLines.push(`<b>${Pilot.name(n)}</b> posted in urgently from OTU, ${plural(n.hours, 'hour', 'hours')} on type.`);
       (s.notices = s.notices || []).push({ kind:'good',
-        text: `<b>${Pilot.name(n)}</b> posted in from OTU with ${n.hours} hours on type.` });
+        text: `<b>${Pilot.name(n)}</b> posted in from OTU with ${plural(n.hours, 'hour', 'hours')} on type.` });
     }
   },
 
@@ -3908,7 +3922,7 @@ const Season = {
       // A well-regarded squadron gets the better of what is available.
       if (s.standing > 65) for (const a of C.attributes) n.truth[a.key] = clamp(n.truth[a.key]+1, 1, 20);
       s.pilots.push(n); s.roll.push(n);
-      lines.push(`<b>${Pilot.name(n)}</b> posted in from OTU, ${n.hours} hours on type.`);
+      lines.push(`<b>${Pilot.name(n)}</b> posted in from OTU, ${plural(n.hours, 'hour', 'hours')} on type.`);
     }
     const need = s.aircraft.filter(a => a.lost).length;
     const got = Math.min(need, Rand.int(C.aircraftReplacementPerWeek[0], C.aircraftReplacementPerWeek[1]));
@@ -3979,7 +3993,7 @@ const Season = {
       p.status = 'transferred';
       s.pilots = s.pilots.filter(x => x.id !== p.id);
       s.dayLines.push(`The MO has taken <b>${Pilot.name(p)}</b> off flying altogether. ` +
-        `He is posted to a training unit. ${p.sorties} sorties, ${p.kills} destroyed.`);
+        `He is posted to a training unit. ${plural(p.sorties, 'sortie', 'sorties')}, ${plural(p.kills, 'destroyed', 'destroyed')}.`);
       return;
     }
     p.status = 'wounded';                       // grounded, not hurt
@@ -5440,7 +5454,7 @@ const INCIDENTS = [
     ctx(){ const tired = Season.activePilots().filter(p => p.fatigue > 62).sort((a,b) => b.fatigue - a.fatigue);
       return tired.length ? { pilot: tired[0] } : null; },
     text(c){ return `The adjutant has a word about <b>${Pilot.name(c.pilot)}</b>. ` +
-      `He is not sleeping, and he was slow off the mark twice yesterday. He has flown ${c.pilot.sorties} sorties.`; },
+      `He is not sleeping, and he was slow off the mark twice yesterday. He has flown ${plural(c.pilot.sorties, 'sortie', 'sorties')}.`; },
     options: [
       { label:'Give him a 48-hour pass', apply(s,c){
           c.pilot.resting = true; c.pilot.restUntil = s.day + 2;
@@ -5455,7 +5469,7 @@ const INCIDENTS = [
   { id:'green', weight:3, cooldown:8,
     ctx(){ const green = Season.activePilots().filter(p => p.hours < 75 && p.sorties < 3);
       return green.length ? { pilot: Rand.pick(green) } : null; },
-    text(c){ return `<b>${Pilot.name(c.pilot)}</b> has ${c.pilot.hours} hours on type and has not yet ` +
+    text(c){ return `<b>${Pilot.name(c.pilot)}</b> has ${plural(c.pilot.hours, 'hour', 'hours')} on type and has not yet ` +
       `fired his guns in anger. The flight commander wants him worked up before he goes on a squadron show.`; },
     options: [
       { label:'Send a reconnaissance sweep first', apply(s,c){
@@ -5507,7 +5521,7 @@ const INCIDENTS = [
               extra = ` <b>${Pilot.name(hero)}</b> went into ${Side.word('dispersal')} after the ` +
                       `telephone orderly and brought him out.`;
             }
-            return `The ${Side.word('station')} was bombed. <b>${n} aircraft destroyed on the ground</b> ` +
+            return `The ${Side.word('station')} was bombed. <b>${plural(n, 'aircraft', 'aircraft')} destroyed on the ground</b> ` +
               `and ${Side.word('dispersal')} demolished.` + extra; }
           return `The raid went elsewhere. The ${Side.word('unit')} stayed at ` +
             `${Side.word('readiness')} and lost nothing.`; } }
@@ -5582,8 +5596,8 @@ const INCIDENTS = [
           // aircraft than it had. Never ground more than are actually there.
           const n = Math.min(serv.length, Math.max(1, Math.round(serv.length * u.grounds)));
           for (let i = 0; i < n; i++) serv[i].repairUntil = s.day + u.takes;
-          return `<b>${u.name}</b> — the fitters start tonight. ${n} aircraft off the ` +
-            `line for ${u.takes} days. You will be flying short until they are back.`; } },
+          return `<b>${u.name}</b> — the fitters start tonight. ${plural(n, 'aircraft', 'aircraft')} off the ` +
+            `line for ${plural(u.takes, 'day', 'days')}. You will be flying short until they are back.`; } },
       { label:'Not now — we cannot spare the aircraft', apply(s,c){
           return `The ${c.up.name.toLowerCase()} will have to wait. The engineer officer ` +
             `notes it in his book and does not say anything.`; } }
@@ -5658,7 +5672,7 @@ const INCIDENTS = [
           const men = Season.readyPilots(); let n = 0;
           for (let i = men.length - 1; i >= Math.ceil(men.length/2); i--){
             men[i].resting = true; men[i].restUntil = s.day + 1; n++; }
-          return `${n} pilots released until this evening.`; } },
+          return `${plural(n, 'pilot', 'pilots')} released until this evening.`; } },
       { label:'Full readiness from dawn', apply(s){
           for (const p of Season.readyPilots()) p.fatigue = clamp(p.fatigue + 7, 0, 100);
           return `The squadron sat at readiness from first light.`; } }
@@ -5675,7 +5689,7 @@ const VIGNETTES = [
   { id:'newboy', weight:5,
     when: () => Season.activePilots().filter(p => p.sorties <= 2 && p.hours < 90),
     say: p => `<b>${Pilot.name(p)}</b> has taken to sitting slightly apart at readiness, ` +
-      `reading the same page of the same magazine. He has ${p.hours} hours and has not ` +
+      `reading the same page of the same magazine. He has ${plural(p.hours, 'hour', 'hours')} and has not ` +
       `fired his guns at anything yet.` },
 
   { id:'firstblood', weight:5,
@@ -5703,7 +5717,7 @@ const VIGNETTES = [
     say: p => Rand.pick([
       `<b>${Pilot.name(p)}</b> fell asleep in the deckchair at readiness and nobody woke him ` +
         `until the telephone went.`,
-      `<b>${Pilot.name(p)}</b> has flown ${p.sorties} sorties. He looks a good deal older ` +
+      `<b>${Pilot.name(p)}</b> has flown ${plural(p.sorties, 'sortie', 'sorties')}. He looks a good deal older ` +
         `than he did in July.`]) },
 
   { id:'pair', weight:5,
@@ -6242,13 +6256,81 @@ const TARGETS = {
 const DEPTH_POS = { coastal:{x:980,y:690}, inland:{x:470,y:880}, deep:{x:130,y:1010} };
 
 /* How lethal the shooting is. One place, so it can be argued with. */
+/* What gets said. Drawn from rather than repeated, so a squadron of twelve in
+   a four-minute action does not say the same sentence to itself nine times. */
+const SAY = {
+  clear: [
+    '{c} is clear and going home.',
+    '{c} is out of it and heading for the coast.',
+    '{c} has had enough and is on his way back.',
+    '{c} is clear. Nothing on him.',
+    '{c} is coming home, and taking his time about it.'
+  ],
+  missed: [
+    '{c} \u2014 fired and missed. Breaking away.',
+    '{c} \u2014 nothing. He has broken off.',
+    '{c} fired too early and is going round again.',
+    '{c} \u2014 missed him, and is not pleased about it.',
+    '{c} \u2014 no strikes seen. Away and round.'
+  ],
+  hit: [
+    '{c} is hit and losing coolant.',
+    '{c} has been hit. Glycol streaming.',
+    '{c} is hit \u2014 there is white smoke coming from him.',
+    '{c} has taken something and is going down a little.',
+    '{c} is hit and his engine is running rough.'
+  ],
+  badly: [
+    '{c} is badly hit and going down for home.',
+    '{c} is in a bad way and turning for the coast.',
+    '{c} is hard hit. He is going down and he is going west.',
+    '{c} has had it and is trying to get back.',
+    '{c} is badly knocked about and making for home.'
+  ],
+  dry: [
+    '{c} \u2014 out of ammunition, going home.',
+    '{c} has fired the lot. He is going home.',
+    '{c} \u2014 nothing left in the guns.',
+    '{c} is dry and getting out of it.'
+  ],
+  breaking: [
+    '{c} \u2014 breaking!',
+    '{c} \u2014 break, break!',
+    '{c} is breaking hard.',
+    '{c} \u2014 going round the corner.'
+  ],
+  nothing: [
+    '{c} \u2014 nothing left up here. Going home.',
+    '{c} \u2014 empty sky. Coming home.',
+    '{c} can see nothing at all. On his way back.'
+  ],
+  claim: [
+    '{c} \u2014 got him! He went straight in.',
+    '{c} \u2014 that is one. He is going down burning.',
+    '{c} \u2014 got one. Pieces came off him.',
+    '{c} \u2014 he has gone in.',
+    '{c} \u2014 that one will not get home.'
+  ]
+};
+
+/* Pick a line, and try not to repeat the last one used for that situation. */
+function say(st, kind, call){
+  const list = SAY[kind];
+  if (!list) return call;
+  st._said = st._said || {};
+  let i = Math.floor(st.rng() * list.length);
+  if (list.length > 1 && i === st._said[kind]) i = (i + 1) % list.length;
+  st._said[kind] = i;
+  return list[i].replace('{c}', call);
+}
+
 const LETHAL = {
-  rate: 0.112,           // strikes per second while a firing position is held
+  rate: 0.098,           // strikes per second while a firing position is held
   needFighter: 3.0,      // strikes to finish a fighter, before toughness
   needBomber: 1.7,       // and a bomber. Toughness does the rest.
   lucky: 0.042,          // chance any single strike is the one that ends it
   luckyCannon: 1.3,      // 20mm finds things eight rifle-calibre guns do not
-  knockOut: 0.70         // share of finished fighters that limp home instead
+  knockOut: 0.52         // share of finished fighters that limp home instead
 };
 
 /* ==========================================================================
@@ -7100,6 +7182,7 @@ const Sim = {
       let d = Math.hypot(o.x - a.x, o.y - a.y);
       if (o.exposed) d *= 0.6;          // the weaver is the one they go for
       if (o.hurt)    d *= 0.7;
+      if (o.exposed) d *= 0.72;         // and they go for him first
       if (o.threat && o.threat !== a) d *= 1.5;   // do not all pile onto one man
       // A man on his firing run is committed, slow and looking at one thing.
       // That is the moment the escort existed for.
@@ -7150,7 +7233,10 @@ const Sim = {
 
     // What the engine will hold at this height. Above it, drag pulls you back —
     // which is how a dive lets you exceed level speed and then lose it again.
-    const eHold = T.vmax + a.alt * K;
+    // 100 octane fuel gave twelve pounds of boost below about fifteen thousand,
+    // which is speed exactly where the fighting mostly was.
+    const boost = (a.mods && a.mods.octane && a.alt < 62) ? 4.5 : 0;
+    const eHold = T.vmax + boost + a.alt * K;
     E += clamp((eHold - E) * 0.13, -6, 6) * dt;
 
     // And a pilot who wants to be slower than that closes the throttle. This is
@@ -7161,7 +7247,11 @@ const Sim = {
       E -= Math.min((a.spd - wantV) * 0.9, 26) * dt;
 
     // You cannot climb on speed you have not got.
-    const climbCap = T.climb * 15 * dt * clamp((a.spd - 33) / 38, 0, 1.25);
+    // The constant-speed propeller was the largest single gain available to a
+    // 1940 fighter; the armour plate behind the seat is weight, and costs a little.
+    const M = a.mods || {};
+    const climbMod = 1 + (M.prop ? 0.22 : 0) + (M.armour ? -0.06 : 0);
+    const climbCap = T.climb * 15 * dt * clamp((a.spd - 33) / 38, 0, 1.25) * climbMod;
     const diveCap  = T.dive * 21 * dt;
     const dAlt = clamp(clamp(w.alt, 4, 100) - a.alt, -diveCap, climbCap);
     if (dAlt > 0) E -= dAlt * K * 0.45;              // the trade is not free upward
@@ -7181,7 +7271,7 @@ const Sim = {
     if (a.x < -120 || a.x > WORLD.w + 120 || a.y < -120 || a.y > WORLD.h + 120){
       if (a.homing || a.role !== 'bomber' || a.bombed){ a.gone = true;
         if (a.side === st.side && a.homing)
-          st.log('rt', `${a.call} is clear and going home.`);
+          st.log('rt', say(st, 'clear', a.call));
       }
     }
     // Down on the deck with no speed is down — but only if he stays there.
@@ -7200,7 +7290,8 @@ const Sim = {
                  + Math.min(mates, 3) * 1.8 * (1 + (a.cover || 0));
     // Deliberately not clamped to 100: a well-briefed section should still have
     // something in hand once the fight has taken its cut.
-    const base = (a.awBase || 74) + shared;
+    // A rear-view mirror is the difference between being bounced and turning.
+    const base = (a.awBase || 74) + shared + ((a.mods && a.mods.mirror) ? 9 : 0);
     const settle = a.engaged ? base * 0.44 : base;
     a.awareness += (settle - a.awareness) * 0.45 * dt + (a.breaking > 0 ? 16 * dt : 0);
     a.awareness = clamp(a.awareness, 8, 100);
@@ -7237,9 +7328,12 @@ const Sim = {
     if (repeat) ap = Object.assign({}, ap, { gun: ap.resetGun, window: false });
     // A deflection shot is almost all marksmanship; an astern shot is mostly
     // just being there. The approach decides which of a pilot's numbers matters.
-    const skill = ap && ap.deflection
+    let skill = ap && ap.deflection
       ? (0.10 + a.gun / 100 * 1.55)
       : (0.45 + a.gun / 100 * 1.10);
+    // Dowding's 400 yards spread the cone. The squadrons that re-set their guns
+    // to 250 hit very much harder, and had to be closer to do it.
+    if (a.mods && a.mods.close) skill *= 1.16;
     // Strikes per second while the position is held.
     let rate = LETHAL.rate
           * skill
@@ -7255,6 +7349,9 @@ const Sim = {
     // that is what a good lookout is actually buying.
     const seen = t.threat === a || t.target === a || t.breaking > 0 || t.defending > 0;
     if (t.role !== 'bomber'){
+      // Coming out of the sun: for the first minute they have not seen anybody.
+      const sec0 = Sim.secOf(st, a);
+      if (sec0 && sec0.surprise && st.t < 70) rate *= 1 + sec0.surprise;
       if (seen) rate *= 0.46;                                   // he is not sitting there
       else rate *= clamp(2.7 - t.awareness / 40, 1.0, 2.7);
     }
@@ -7320,7 +7417,10 @@ const Sim = {
       return;
     }
 
-    const need = (t.role === 'bomber' ? LETHAL.needBomber : LETHAL.needFighter) * TT.tough;
+    // Told to get in close, they get in close, and a burst from two hundred
+    // yards needs fewer strikes than the same burst from four hundred.
+    const need = (t.role === 'bomber' ? LETHAL.needBomber : LETHAL.needFighter)
+                 * TT.tough / (shooter.lethal || 1);
     if (t.hits < need * 0.55) return;
 
     if (t.hits >= need) return Sim.finish(st, shooter, t, false);
@@ -7330,7 +7430,7 @@ const Sim = {
         (shooter.damagedClaims = shooter.damagedClaims || []).push(AC[t.ac].name);
       if (t.side === st.side){
         st.damaged++;
-        st.log('bad', `<b>${t.call}</b> is hit and losing coolant.`);
+        st.log('bad', say(st, 'hit', `<b>${t.call}</b>`));
         Sim.alert(st, t, 'hit', `${t.name} is hit. He can still fly, for now.`,
           ['home','stick'], 9);
       }
@@ -7347,7 +7447,7 @@ const Sim = {
         t.hurt = true; t.homing = true; t.target = null; t.phase = null;
         t.hits = LETHAL.needFighter * AC[t.ac].tough * 0.45;
         if (t.side === st.side){ st.damaged++;
-          st.log('bad', `<b>${t.call}</b> is badly hit and going down for home.`);
+          st.log('bad', say(st, 'badly', `<b>${t.call}</b>`));
         } else if (shooter.side === st.side){
           shooter.probables = (shooter.probables||0) + 1; st.probables = (st.probables||0)+1;
           (shooter.damagedClaims = shooter.damagedClaims || []).push(AC[t.ac].name);
@@ -7383,7 +7483,11 @@ const Sim = {
     if (a.role === 'bomber'){
       st.bombersDown++;
       if (st.side === 'raf'){ st.claims++;
-        st.log('good', `<b>${by ? by.call : 'Somebody'}</b> — a ${AC[a.ac].name} going down.`);
+        st.log('good', `<b>${by ? by.call : 'Somebody'}</b> \u2014 ` +
+          st.rng.pick(['a ' + AC[a.ac].name + ' going down.',
+                       'that ' + AC[a.ac].name + ' has had it.',
+                       'a ' + AC[a.ac].name + ', going down in flames.',
+                       'one ' + AC[a.ac].name + ' on fire and going in.']));
       } else {
         st.log('bad', `A ${AC[a.ac].name} has gone down. That is one we were meant to protect.`);
       }
@@ -7392,6 +7496,8 @@ const Sim = {
     if (mine){
       st.losses++;
       a.out = st.homeSide === a.side ? 'shot down' : 'shot down over the water';
+      // Covering the gravity tank is why the burns unit stopped filling up.
+      a.burnedOff = !!(a.mods && a.mods.tanks);
       const dead = st.rng.chance(0.30);
       if (dead){ st.dead++;
         st.log('bad', `<b>${a.name}</b> ${how}. No parachute.`);
@@ -7402,7 +7508,11 @@ const Sim = {
       const sec = Sim.secOf(st, a); if (sec) sec.cohesion -= 12;
     } else {
       st.foeLost++; if (by && by.side === st.side){ st.claims++;
-        st.log('good', `<b>${by.call}</b> — a ${AC[a.ac].name} destroyed.`);
+        st.log('good', `<b>${by.call}</b> \u2014 ` +
+          st.rng.pick(['a ' + AC[a.ac].name + ' destroyed.',
+                       'a ' + AC[a.ac].name + '. He went straight in.',
+                       'got a ' + AC[a.ac].name + '. Pieces came off him.',
+                       'that is a ' + AC[a.ac].name + ' finished.']));
       }
     }
   },
@@ -7608,8 +7718,9 @@ const Sim = {
         a.homing = true; a.target = null; a.phase = null;
         if (a.side === st.side)
           if (st.rng() < 0.34)
-          st.log('rt', `${a.call} — ${a.ammo <= 0.3 ? 'out of ammunition, going home'
-            : a.hurt ? 'hit, breaking off' : 'nothing left, going home'}.`);
+          st.log('rt', a.ammo <= 0.3 ? say(st, 'dry', a.call)
+               : a.hurt ? `${a.call} \u2014 hit, breaking off.`
+               : say(st, 'nothing', a.call));
       }
     }
   },
@@ -7695,14 +7806,14 @@ const Sim = {
     if (act === 'break'){
       a.breaking = 2.4; a.breakDir = st.rng.chance(0.5) ? 1 : -1;
       a.target = null;
-      if (st.rng() < 0.16) st.log('rt', `<b>${a.call}</b> — breaking!`);
+      if (st.rng() < 0.16) st.log('rt', say(st, 'breaking', `<b>${a.call}</b>`));
     } else if (act === 'burst'){
       // Take the shot now, at whatever range he is at, and go.
       if (a.target && Sim.live(a.target) && a.ammo > 0){
         a.ammo = Math.max(0, a.ammo - 1.5); a.fireFx = 0.3;
         const p = 0.20 + a.gun / 260;
         if (st.rng() < p) Sim.hit(st, a, a.target);
-        else st.log('rt', `<b>${a.call}</b> — fired and missed. Breaking away.`);
+        else st.log('rt', say(st, 'missed', `<b>${a.call}</b>`));
       }
       a.breaking = 1.1; a.breakDir = st.rng.chance(0.5) ? 1 : -1;
     } else if (act === 'stick'){
@@ -7766,7 +7877,7 @@ const Sim = {
         if (a.phase === 'run' || a.phase === 'setup') continue;   // let him finish
         if (!near && st.rng() < 0.02){
           a.homing = true; a.target = null; a.phase = null;
-          if (st.rng() < 0.3) st.log('rt', `${a.call} — nothing left up here. Going home.`);
+          if (st.rng() < 0.3) st.log('rt', say(st, 'nothing', a.call));
         }
       }
     }
@@ -7841,6 +7952,19 @@ Sim.step = function(st, dt){
    only translation needed is the attribute scale. */
 Sim.fromCampaign = function(cst, opts){
   opts = opts || {};
+  // What the squadron has been given, and what it costs to have it.
+  const up = (id) => (typeof Season !== 'undefined' && Season.hasUpgrade)
+    ? !!Season.hasUpgrade(id) : false;
+  const mods = {
+    prop:    up('prop'),      // constant-speed propeller: climb
+    octane:  up('octane'),    // 100 octane: boost low down
+    mirror:  up('mirror'),    // you see them coming
+    armour:  up('armour'),    // heavier, and it stops things
+    tanks:   up('tanks'),     // the gravity tank covered
+    vhf:     up('vhf'),       // they can hear you
+    close:   (typeof Season !== 'undefined' && Season.s &&
+              Season.s.harmonisation === 'close_250')
+  };
   const side = (Season.s && Season.s.side === 'lw') ? 'lw' : 'raf';
   const seed = opts.seed || ((Date.now() ^ (Math.random()*1e9)) >>> 0);
   const depth = opts.depth || 'inland';
@@ -7866,6 +7990,15 @@ Sim.fromCampaign = function(cst, opts){
       ammo: (m.ac && m.ac.ammoSeconds) || 15,
       src: m                      // the campaign's man, written back to at the end
     });
+    a.mods = mods;
+    // Tiredness is not a number on a card. A worn-out man is slower to see
+    // things and slower to answer them, and that is most of what kills him.
+    const tired = clamp((m.fatigue || 0) / 100, 0, 1);
+    a.tired = tired;
+    a.awareness = clamp(a.awareness - tired * 22, 20, 96);
+    a.awBase = a.awareness;
+    a.exp = clamp(a.exp - tired * 12, 1, 100);
+    a.nerve = clamp(a.nerve - tired * 10, 1, 100);
     a.awBase = a.awareness;
     st.air.push(a);
     return a;
@@ -8366,7 +8499,7 @@ const UI = {
     if (UI.hasShares())
       for (let i=0;i<Math.min(p.shared,6);i++) bits.push(UI.victoryMark('share'));
     for (let i=0;i<Math.min(p.damaged,6);i++)  bits.push(UI.victoryMark('damaged'));
-    const txt = `${p.kills} destroyed${UI.hasShares() ? ` · ${p.shared} shared` : ''}` +
+    const txt = `${plural(p.kills, 'destroyed', 'destroyed')}${UI.hasShares() ? ` · ${p.shared} shared` : ''}` +
                 ` · ${p.damaged} damaged`;
     return `<div class="claims" title="${txt}"><span class="lab">Claims</span>${
       bits.join('') || '<span class="lab">none</span>'}</div>`;
@@ -8496,8 +8629,8 @@ const UI = {
               <span class="flt sect" data-section="${p.id}" title="Click to post him to a ${
                 Side.word('section')}">${p.section || ('any ' + Side.word('section'))}</span></h3>
             <div class="sub">${p.isCommander ? '<b>You have command.</b> ' : ''}${
-              p.nationLabel ? '<b>' + p.nationLabel + '</b> · ' : ''}${p.hours} hours on type ·
-              ${p.sorties} sorties since 1 July 1940</div>
+              p.nationLabel ? '<b>' + p.nationLabel + '</b> · ' : ''}${plural(p.hours, 'hour', 'hours')} on type ·
+              ${plural(p.sorties, 'sortie', 'sorties')} since 1 July 1940</div>
             <div class="sub know k${know}">${Pilot.acquaintanceLabel[know]}${
               (p.aptitudeSeen||0) >= 6 ? ' \u00b7 ' + Season.aptitudeWord(p) : ''}${
               p.permanentHarm && p.permanentHarm.length ? ' · <span class="hurtline">' + p.permanentHarm[0] + '</span>' : ''}</div>
@@ -8589,6 +8722,59 @@ const UI = {
     });
   },
 
+  /* The minutes at dispersal. Push your luck: everything said costs more than
+     the last thing said, and a leader who overruns has told them nothing they
+     will remember when it matters. */
+  briefingScreen(onDone){
+    const pool = Season.briefPool();
+    let taken = [], spent = 0, bust = false;
+    const host = document.createElement('div');
+    host.className = 'mfsheet briefwrap';
+    document.body.appendChild(host);
+
+    const paint = () => {
+      const left = pool - spent;
+      host.innerHTML = `<div class="mfsheetin briefin">
+        <span class="eyebrow">At dispersal</span>
+        <h2 class="mfh2">${bust ? 'You have talked too long.'
+          : 'What do you tell them?'}</h2>
+        ${bust
+          ? `<p class="mfnarr mfbadtext">The section leaders stopped listening some
+             minutes ago and the telephone has gone. Nothing you said this morning
+             is going up with them.</p>`
+          : `<p class="mfnarr">You have <b>${plural(left, 'minute', 'minutes')}</b>
+             before they go. Everything you say takes longer than the last thing,
+             and there is a point past which they stop taking it in.</p>`}
+        ${taken.length ? `<div class="brieftaken">${taken.map(c =>
+            `<span>${c.name}</span>`).join('')}</div>` : ''}
+        ${bust ? '' : `<div class="mfopts">${BRIEF_CARDS
+          .filter(c => !taken.includes(c))
+          .map(c => {
+            const cost = Season.briefCost(c, taken);
+            return `<button data-b="${c.id}"><b>${c.name}</b>
+              <span>${c.why}</span>
+              <em class="bcost">${plural(cost, 'minute', 'minutes')}${
+                cost > left ? ' \u2014 longer than you have' : ''}</em></button>`;
+          }).join('')}</div>`}
+        <div class="mfopts"><button id="briefgo" class="briefgo"><b>${
+          bust ? 'Get them off the ground' : 'That is all \u2014 start engines'}</b></button></div>
+      </div>`;
+
+      host.querySelectorAll('[data-b]').forEach(b => b.onclick = () => {
+        const card = BRIEF_CARDS.find(c => c.id === b.dataset.b);
+        const cost = Season.briefCost(card, taken);
+        taken.push(card); spent += cost;
+        if (spent > pool){ bust = true; }
+        paint();
+      });
+      host.querySelector('#briefgo').onclick = () => {
+        host.remove();
+        onDone(bust ? {} : Season.briefEffect(taken), bust);
+      };
+    };
+    paint();
+  },
+
   /* ------------------------------------------------------------ operations */
   ops(el){
     const s = Season.s;
@@ -8623,7 +8809,7 @@ const UI = {
           <b>${Season.awardNoun(s.recommendation.award)}</b> for <b>${Pilot.name(p)}</b> —
           ${s.recommendation.reason ? s.recommendation.reason
             : (UI.hasShares()
-                ? `${p.kills} destroyed and ${p.shared} shared in ${p.sorties} sorties`
+                ? `${plural(p.kills, 'destroyed', 'destroyed')} and ${p.shared} shared in ${plural(p.sorties, 'sortie', 'sorties')}`
                 : `${p.kills} confirmed in ${p.sorties} operational flights`)}.</p>
         <p class="meta">${Side.is('lw')
             ? 'Confirmation takes weeks to come back through the Geschwader.'
@@ -8642,8 +8828,8 @@ const UI = {
       html += `<div class="panel call">
         <div class="when">${s.pending.time} · ${s.pending.type.name}</div>
         <p class="plot">${Season.callText(s.pending)}</p>
-        <p class="meta">${Season.readyPilots().length} pilots available,
-          ${Season.serviceable().length} aircraft serviceable.
+        <p class="meta">${plural(Season.readyPilots().length, 'pilot', 'pilots')} available,
+          ${plural(Season.serviceable().length, 'aircraft', 'aircraft')} serviceable.
           Tap a man on the Pilots page, or use these.</p>
         <div class="btnrow" id="quickpick"></div>
         <div class="btnrow" id="chosenrow"></div>
@@ -8807,7 +8993,7 @@ const UI = {
       if (over){
         const w = document.createElement('span');
         w.className = 'meta'; w.style.color = 'var(--bad)';
-        w.textContent = `Only ${serv} aircraft serviceable.`;
+        w.textContent = `Only ${plural(serv, 'aircraft', 'aircraft')} serviceable.`;
         row.appendChild(w);
       }
     }
@@ -8889,7 +9075,9 @@ const UI = {
       if (b && Season.useMapBattle() && typeof UI.mapfight !== 'undefined'){
         if (!UI.mapfight.el && !b.mapOpened){
           b.mapOpened = true;
+          UI.briefingScreen((brief, bust) => {
           UI.mapfight.open(b.ctx.st, {
+            brief, bust,
             ctx: b.ctx,
             depth: Season.mapDepthFor(Season.s.pending),
             target: Season.mapTargetFor(Season.s.pending),
@@ -8900,6 +9088,7 @@ const UI = {
             // The men already carry the result; the campaign closes it out.
             Season.concludeBattle();
             UI.render();
+          });
           });
         }
         return;
@@ -9641,7 +9830,7 @@ const UI = {
     const picked = men.filter(p => s.selected.has(p.id)).length;
 
     el.innerHTML = `<div class="sbhead">Readiness board</div>
-      <div class="sbnote">${Season.readyPilots().length} available · ${serv} aircraft` +
+      <div class="sbnote">${Season.readyPilots().length} available · ${plural(serv, 'aircraft', 'aircraft')}` +
       (picking ? ` · <b>${picked}</b> detailed` : '') + `</div>` +
       UI.groupList().map(f => {
         const flight = men.filter(p => UI.groupKey(p) === f.key);
@@ -9693,7 +9882,7 @@ const UI = {
       const tally = [
         (p.kills || 0) ? p.kills + ' destroyed' : '',
         (p.shared || 0) ? p.shared + ' shared' : '',
-        (p.sorties || 0) + ' sorties'
+        plural(p.sorties || 0, 'sortie', 'sorties')
       ].filter(Boolean).join(' \u00b7 ');
       const awards = (p.awards && p.awards.length)
         ? `<div class="hfa">${p.awards.join(', ')}</div>` : '';
@@ -9708,7 +9897,7 @@ const UI = {
     const nDead = all.filter(dead).length, nGone = all.filter(gone).length;
     return `<div class="panel hall">
       <div class="when">Everyone who served</div>
-      <p class="meta">${all.length} men passed through the squadron.
+      <p class="meta">${plural(all.length, 'man', 'men')} passed through the squadron.
         ${nDead ? `<b>${nDead}</b> did not come back.` : 'Not one of them was lost.'}
         ${nGone ? ` <b>${nGone}</b> were invalided from flying.` : ''}</p>
       <div class="hallgrid">${all.map(card).join('')}</div>
@@ -9775,8 +9964,8 @@ const UI = {
             <div class="secblock">
               <div class="seclab">Leading scorers</div>
               ${r.top.filter(p => p.kills + p.shared > 0).map(p =>
-                `<p class="hand">${Pilot.name(p)} — ${p.kills} destroyed, ${p.shared} shared, ` +
-                `${p.damaged} damaged in ${p.sorties} sorties` +
+                `<p class="hand">${Pilot.name(p)} — ${plural(p.kills, 'destroyed', 'destroyed')}, ${p.shared} shared, ` +
+                `${p.damaged} damaged in ${plural(p.sorties, 'sortie', 'sorties')}` +
                 `${['killed','missing'].includes(p.status) ? ', killed in action' : ''}.</p>`).join('')
                 || '<p class="hand">None.</p>'}
             </div>
@@ -9852,7 +10041,7 @@ const UI = {
             // raid back; the Jagdwaffe wins by getting it to the target and home.
             // Same numbers, opposite sign, and the form has to say so.
             ? (r.reported
-                ? field('Verband escorted', r.reported + ' aircraft')
+                ? field('Verband escorted', plural(r.reported, 'aircraft', 'aircraft'))
                 : field('Verband escorted', 'Freie Jagd \u2014 nothing to escort'))
             : field('Enemy reported', r.reported + '+')}
           ${r.target ? field(Side.is('lw') ? 'Our objective' : 'Their objective', r.target) : ''}
@@ -9868,9 +10057,9 @@ const UI = {
                 : (r.raidBroken
                     ? 'Raid broken up. It did not reach its target.'
                     : (r.stationHit
-                       ? 'They bombed this station. ' + r.stationHit + ' aircraft destroyed on the ground.'
+                       ? 'They bombed this station. ' + plural(r.stationHit, 'aircraft', 'aircraft') + ' destroyed on the ground.'
                        : 'They got through.'))}</span></div>` : ''}
-          ${r.contact ? field('Enemy strength', r.strength + ' aircraft, ' + r.engaged + ' engaged') : ''}
+          ${r.contact ? field('Enemy strength', plural(r.strength, 'aircraft', 'aircraft') + ', ' + r.engaged + ' engaged') : ''}
           ${field('Enemy aircraft seen', metLine)}
           ${r.contact && r.unengaged
             ? field(Side.is('lw') ? 'Got past us to the bombers' : 'Passed unengaged',
@@ -10198,7 +10387,7 @@ const UI = {
               : p.status === 'missing' ? Side.word('missingShort')
               : p.status === 'invalided' ? 'Invalided from flying'
               : 'Posted away'}${p.lostDate ? ' · ' + p.lostDate : ''}</div>
-            <div class="pf">${p.nationLabel ? p.nationLabel + ' · ' : ''}${p.hours} hours on type · ${p.sorties} sorties</div>
+            <div class="pf">${p.nationLabel ? p.nationLabel + ' · ' : ''}${plural(p.hours, 'hour', 'hours')} on type · ${plural(p.sorties, 'sortie', 'sorties')}</div>
             ${UI.claimRow(p)}
             ${UI.ribbons(p)}
           </div>`).join('') + `</div></div>`;
@@ -12547,6 +12736,85 @@ const INCIDENTS_MORE = [
 // Added to the original set rather than replacing it.
 INCIDENTS.push(...INCIDENTS_MORE);
 
+
+/* ==========================================================================
+   THE BRIEFING
+   The minutes at dispersal before the squadron goes. Everything here was
+   already in the simulation and being handed an empty object: the section
+   cohesion, the extra pair of eyes, the man told to weave. This is the part
+   that decides what the squadron takes up with it.
+
+   The currency is time. There is never quite enough of it, and a leader who
+   tries to say everything ends up saying nothing anybody remembers -- which
+   is what a bust is.
+   ========================================================================== */
+const BRIEF_CARDS = [
+  { id:'height', cost:2, name:'Get above them first',
+    why:'Nobody attacks until we have the height. It costs us the first pass.',
+    gives:{ alt:+12, speed:-4 } },
+
+  { id:'sun', cost:2, name:'Come out of the sun',
+    why:'We go round. It takes longer and they do not see us at all.',
+    gives:{ surprise:0.35, awareness:+6 } },
+
+  { id:'weave', cost:1, name:'Last man weaves',
+    why:'One pair of eyes behind the section. It is the worst job in the squadron.',
+    gives:{ weaver:true, awareness:+8 } },
+
+  { id:'pairs', cost:2, name:'Fight in pairs, not vics',
+    why:'Two aircraft that look after each other, not three in a tidy line.',
+    gives:{ cohesion:+18, cover:0.30, awareness:+6 } },
+
+  { id:'close', cost:2, name:'Nobody fires beyond two hundred yards',
+    why:'Get in close. Closer than you think. Then you will not miss.',
+    gives:{ lethal:+0.22, hit:-0.10 } },
+
+  { id:'onepass', cost:1, name:'One pass and away',
+    why:'Nobody hangs about over the target. Straight through and out.',
+    gives:{ nerve:+8, speed:+8, hit:-0.12 } },
+
+  { id:'rt', cost:1, name:'Keep the R/T clear',
+    why:'Nothing said on the wireless that is not a warning or an order.',
+    gives:{ compliance:0.18, cohesion:+10, awareness:+4 } },
+
+  { id:'topcover', cost:3, name:'Green Section stays up as top cover',
+    why:'One section high and out of it, to come down when the rest are jumped.',
+    gives:{ topcover:true, cover:0.25, awareness:+7, alt:+6 } },
+
+  { id:'engines', cost:1, name:'A word with the fitters',
+    why:'Five minutes with the ground crew about what came back rough yesterday.',
+    gives:{ cohesion:+6, awareness:+4 } },
+
+  { id:'newmen', cost:2, name:'Take the new men through it slowly',
+    why:'The two who arrived this week do not know what a vector is.',
+    gives:{ nerve:+10, cohesion:+10, speed:-4 } }
+];
+
+/* How long the squadron has, and how quickly it runs out. A practised
+   squadron gets through more; a large one takes longer over everything. */
+Season.briefPool = function(){
+  const men = Season.readyPilots();
+  const exp = men.length
+    ? men.reduce((t,p) => t + Pilot.workedUp(p), 0) / men.length : 40;
+  return Math.round(5 + exp / 26);
+};
+
+Season.briefCost = function(card, taken){
+  // Each thing said after the first costs a little more than the last.
+  return Math.round(card.cost * (1 + taken.length * 0.35));
+};
+
+Season.briefEffect = function(taken){
+  const out = {};
+  for (const c of taken)
+    for (const k in c.gives){
+      const v = c.gives[k];
+      if (typeof v === 'boolean') out[k] = v;
+      else out[k] = (out[k] || 0) + v;
+    }
+  return out;
+};
+
 /* ==========================================================================
    WHAT HAS BEEN EARNED
    Kept beside the records and never touched by a save, so seeing a campaign
@@ -13081,8 +13349,31 @@ Pilot.toBattleSpec = function(p, typeKey){
 // shooting at anything, so the Staffel comes home and the bombers do not.
 const _autoResolve = Battle.autoResolve;
 Battle.autoResolve = function(st){
-  const out = _autoResolve.call(Battle, st);
-  return out;
+  // Run the same simulation the player flies, with nobody watching and the
+  // section leaders commanding themselves.
+  if (typeof MapBattle !== 'undefined' && MapBattle.Sim && st && st.fr){
+    try {
+      const m = MapBattle.Sim.fromCampaign(st, {
+        seed: (Rand.raw() * 4294967296) >>> 0,
+        depth: Season.mapDepthFor(Season.s && Season.s.pending),
+        target: Season.mapTargetFor(Season.s && Season.s.pending),
+        vhf: Season.hasUpgrade('vhf')
+      });
+      // A squadron that is not being led by hand still had a briefing; the
+      // leader is assumed to have said the two obvious things.
+      MapBattle.Sim.applyBriefAll(m,
+        Season.briefEffect([BRIEF_CARDS[0], BRIEF_CARDS[2]]), false);
+      let t = 0;
+      while (!m.over && t < 340){ MapBattle.Sim.step(m, 0.1); t += 0.1; }
+      MapBattle.Sim.writeBack(m);
+      st.mapFought = true;
+      st.turnedAway = !!m.turnedAway;
+      return st;
+    } catch(e){
+      // If anything at all goes wrong, the old model still works.
+    }
+  }
+  return _autoResolve.call(Battle, st);
 };
 
 Season.stancesAvailable = function(){
