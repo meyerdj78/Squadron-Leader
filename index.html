@@ -666,7 +666,7 @@
 
   /* ---- the map battle ---- */
   .mfight{position:fixed;top:0;left:0;width:100vw;height:100dvh;z-index:210;
-    display:flex;background:#0C1421;color:#f4f8fd;
+    display:flex;flex-direction:column;background:#0C1421;color:#f4f8fd;
     font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   .mfleft{flex:1 1 auto;display:flex;flex-direction:column;min-width:0;min-height:0;background:#0C1421}
   .mftop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:0 0 auto;
@@ -686,6 +686,41 @@
     background:#16233a;touch-action:manipulation}
   .mfhint{position:absolute;left:0;right:0;bottom:8px;text-align:center;pointer-events:none;
     font-size:11px;color:#cfe0f5;text-shadow:0 1px 4px #000,0 0 10px #000}
+  /* The squadron along the bottom, and the R/T over the map. */
+  .mfstrip{flex:0 0 auto;border-top:1px solid #44608A;background:#16223A;
+    max-height:34vh;display:flex;flex-direction:column;min-height:0}
+  .mfstriphead{display:flex;justify-content:space-between;align-items:baseline;
+    padding:6px 11px 4px;border-bottom:1px solid #2b3d5e}
+  .mfstriphead em{font-style:normal;font-size:11px;color:#adc2da}
+  .mfmen{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+    gap:5px;padding:7px 9px;overflow-y:auto;min-height:0}
+  .mfman{display:flex;align-items:center;gap:7px;padding:4px 7px;border-radius:2px;
+    border:1px solid #2b3d5e;background:#1B2942;cursor:pointer;transition:border-color .15s}
+  .mfman:hover{border-color:#D2A85C}
+  .mfman .mn{flex:0 0 74px;font:11.5px/1.3 "Courier New",monospace;color:#dcecff;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mfman .mac{flex:0 0 auto;width:78px;height:24px}
+  .mfman .mst{flex:1 1 auto;font:10px/1.3 "Courier New",monospace;letter-spacing:.06em;
+    color:#8fa6c2;text-align:right}
+  .mfman .mrt{flex:0 0 auto;margin-left:6px;padding:2px 7px;border-radius:2px;
+    border:1px solid #44608A;background:rgba(52,74,110,.5);color:#8fcaff;
+    font:9px/1.5 "Courier New",monospace;letter-spacing:.12em;cursor:pointer}
+  .mfman .mrt:hover{border-color:#8fcaff}
+  .mfman.picked{border-color:#D2A85C;background:#26395a;
+    box-shadow:0 0 0 1px rgba(210,168,92,.35)}
+  .mfman.hurt{border-color:#8a5a3a}
+  .mfman.hurt .mst{color:#ff9440}
+  .mfman.gone{opacity:.42;cursor:default}
+  .mfman.gone .mst{color:#ff6f5c}
+  .mfman.ordered{border-color:#D2A85C;background:#243654}
+  .mfcalls{position:absolute;left:10px;right:10px;bottom:30px;pointer-events:none;
+    display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+  .mfcall{margin:0;font:12px/1.45 "Courier New",monospace;color:#dcecff;
+    background:rgba(8,14,24,.72);border-left:2px solid #44608A;padding:3px 9px;
+    border-radius:2px;text-shadow:0 1px 3px #000;transition:opacity .5s}
+  .mfcall.mfrt{border-left-color:#8fcaff}
+  .mfcall.mfgood{border-left-color:#5fe08f}
+  .mfcall.mfbad{border-left-color:#ff7c66}
   .mfright{flex:0 0 250px;border-left:1px solid #44608A;background:#1C2942;
     display:flex;flex-direction:column;min-height:0;
     padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
@@ -743,6 +778,7 @@
   @media (max-width:820px){
     .mfight{flex-direction:column}
     .mfright{flex:0 0 34%;border-left:0;border-top:1px solid #44608A}
+    .mfmen{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
     #mfticker{max-height:44%}
   }
 
@@ -840,7 +876,7 @@
 <div id="bootmark" style="position:fixed;left:0;right:0;top:0;z-index:9999;
   background:#0C1421;color:#8fa6c2;font:12px/1.5 monospace;letter-spacing:.1em;
   padding:10px 12px;text-align:center;border-bottom:1px solid #44608A">
-  SQUADRON LEADER &middot; BUILD 31 AUG 02 &middot; loading&hellip;
+  SQUADRON LEADER &middot; BUILD 31 AUG 04 &middot; loading&hellip;
 </div>
 <div id="buildmark" style="position:fixed;right:5px;bottom:4px;z-index:400;pointer-events:none;
   font:9px/1 monospace;letter-spacing:.14em;color:#61799c;background:rgba(12,20,33,.85);
@@ -1059,7 +1095,7 @@ const BADGES = {
   '616': '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',
 };
 
-const BUILD = '31 Aug \u00b7 02';
+const BUILD = '31 Aug \u00b7 04';
 
 const BALANCE = {
   // How claims are assessed, as the RAF actually assessed them: the man who did
@@ -7299,6 +7335,8 @@ const Sim = {
       // How fast he wants to be when he gets there. Throttled back for a tight
       // turn afterwards, or flat out to be through and gone.
       let wantSpd = d < 90 ? Math.min(98, t.spd + 14) : 88;
+      // Told to keep his height, he does not dive after them.
+      if (a.holdHeight) wantAlt = Math.max(wantAlt, a.alt);
       if (tacNow && tacNow.approach && a.phase === 'run' && !a.converted)
         wantSpd = tacNow.approach;
       if (tacNow && tacNow.energyEdge){
@@ -7530,6 +7568,8 @@ const Sim = {
 
     if (a.fireFx > 0) a.fireFx -= dt;
     if (a.hitFx > 0)  a.hitFx  -= dt;
+    // The little flash on his card when an order has just gone to him.
+    if (a.ordering > 0) a.ordering -= dt;
     const sec0 = Sim.secOf(st, a);
     const mates = sec0 ? sec0.men.filter(m => Sim.live(m) && m !== a).length : 0;
     // Eyes other than your own. A pair covering each other sees roughly twice
@@ -7557,6 +7597,8 @@ const Sim = {
     if (d > 62 || off > 0.42 || alt > 14){ a.gunTime = 0; return; }
 
     // In a firing position. Hold it and the burst tells.
+    // Told to watch his ammunition, he fires shorter bursts.
+    if (a.spare && a.gunTime > 1.1) return;
     a.gunTime += dt;
     a.shots = (a.shots || 0) + dt;
     a.ammo = Math.max(0, a.ammo - dt);
@@ -7777,6 +7819,16 @@ const Sim = {
     for (const sec of st.secs){
       const men = sec.men.filter(Sim.live);
       if (!men.length) continue;
+      // Told to hold a place, he holds it until he is told otherwise.
+      if (sec.stationed){
+        const men2 = sec.men.filter(Sim.live);
+        if (!men2.length || men2.every(a => a.homing)) { sec.stationed = null; }
+        else if (!sec.order || sec.order.kind !== 'station'){
+          Sim.station(st, sec, sec.stationed.x, sec.stationed.y, sec.stationed.band);
+        }
+        continue;
+      }
+
       // Ordered by hand. The leader still chooses how, but not what.
       if (sec.ordered){
         const f = st.forms.find(x => x.id === sec.ordered);
@@ -11746,10 +11798,12 @@ UI.mapfight = (function(){
               '<button data-z="all">Whole map</button>' +
               '<button data-z="follow">Follow</button></div></div>' +
           '<div class="mfwrap"><canvas id="mfcv"></canvas>' +
+            '<div class="mfcalls" id="mfcalls"></div>' +
             '<div class="mfhint" id="mfhint"></div></div>' +
         '</div>' +
-        '<div class="mfright"><h3><span>The squadron</span><em id="mfup"></em></h3>' +
-          '<div id="mfalerts"></div><div id="mfticker"></div></div>';
+        '<div class="mfstrip"><div class="mfstriphead">' +
+          '<span class="eyebrow">The squadron</span><em id="mfup"></em></div>' +
+          '<div class="mfmen" id="mfmen"></div></div>';
       document.body.appendChild(host);
       M.el = host;
       M.cv = $('mfcv'); M.cx = M.cv.getContext('2d');
@@ -11782,7 +11836,7 @@ UI.mapfight = (function(){
       }, { passive:false });
       M._resize = () => M.fit();
       window.addEventListener('resize', M._resize);
-      M.hint('Tap a section to follow it. The section leaders are flying this one.');
+      M.hint('Pick a section \u2014 on the map or below \u2014 then tap the map to send them.');
       M.st.log('nar', Side.word('control') === 'Sector Control'
         ? 'Sector Control has the raid crossing in.'
         : 'Die Gruppe meldet: Indianer im Anflug.');
@@ -11842,7 +11896,7 @@ UI.mapfight = (function(){
           M.fit();
         } else M.follow = null;
       }
-      M.draw(); M.alerts(); M.ticker();
+      M.draw(); M.men(); M.calls();
       $('mfclock').textContent = M.fmt(st.t);
       if (st.bombersThrough && !st._out){
         st._out = true;
@@ -12035,6 +12089,18 @@ UI.mapfight = (function(){
 
     hint(t){ const h = $('mfhint'); if (h) h.textContent = t; },
 
+    /* Pick a section to direct. The map is then the order. */
+    pick(sec){
+      if (!sec || !Sim.secUp(sec)) return;
+      if (M.sel === sec){ M.sel = null; M.follow = null; M.paintZoom();
+        return M.hint('Tap a section, then the map to send it somewhere.'); }
+      M.sel = sec; M.follow = sec;
+      if (M.zoom < 2) M.setZoom(2.4);
+      M.paintZoom();
+      M.hint(sec.id + ' \u2014 now tap a formation to go for it, or open sky to ' +
+             'hold them there. Tap ' + sec.id + ' again to let go.');
+    },
+
     setZoom(z){
       M.zoom = clamp(z, 1, 6);
       if (M.zoom === 1){ M.panx = 0; M.pany = 0; M.follow = null; }
@@ -12109,23 +12175,7 @@ UI.mapfight = (function(){
         const d = Math.hypot(a.x - X, a.y - Y);
         if (d < bd){ bd = d; best = sec; }
       }
-      if (bd < reachSec){
-        // Tapping the same section again calls it off.
-        if (M.sel === best && best.ordered){
-          best.ordered = null;
-          Sim.order(M.st, best, 'home');
-          M.st.log('rt', `<b>${best.id} ${M.st.L.leader}</b> \u2014 breaking off, going home.`);
-          M.hint(best.id + ' called off.');
-          M.sel = null; M.follow = null; M.paintZoom();
-          return;
-        }
-        M.sel = best; M.follow = best;
-        if (M.zoom < 2) M.setZoom(2.4);
-        M.paintZoom();
-        M.hint(best.id + ' \u2014 now tap a formation to send them at it, or tap ' +
-               best.id + ' again to call them off.');
-        return;
-      }
+      if (bd < reachSec){ M.pick(best); return; }
       let bf = null, bfd = 1e9;
       for (const f of st.forms){
         const alive = f.members.filter(Sim.live);
@@ -12139,8 +12189,9 @@ UI.mapfight = (function(){
       // A formation, with a section already picked: send them at it.
       if (bf && bfd < reachForm){
         if (!M.sel)
-          return M.hint('Tap one of your own sections first, then tap what to send it at.');
+          return M.hint('Pick a section first \u2014 on the map, or a man below.');
         M.sel.ordered = bf.id;
+        M.sel.stationed = null;
         M.st.log('rt', `<b>${M.sel.id} ${M.st.L.leader}</b> \u2014 going for ${
           bf.label.toLowerCase()}.`);
         M.hint(M.sel.id + ' sent at ' + bf.label.toLowerCase() +
@@ -12148,9 +12199,12 @@ UI.mapfight = (function(){
         M.sel = null;
         return;
       }
-      // Empty sky: let go of whatever was selected.
+      // Open sky, with a section picked: go there and hold it.
+      if (M.sel && X > -60 && X < WORLD.w + 60 && Y > -60 && Y < WORLD.h + 60)
+        return M.stationSheet(X, Y);
+
       M.sel = null; M.follow = null; M.paintZoom();
-      M.hint('Tap a section, then a formation to send it at. Tap the section again to call it off.');
+      M.hint('Tap a section, or a man below, then the map to send them somewhere.');
     },
 
     attackSheet(form){
@@ -12178,7 +12232,13 @@ UI.mapfight = (function(){
           w:'Out of the fight. Everyone in the section, now.' }
       ], '', k => {
         if (k === '__home') Sim.order(M.st, M.sel, 'home');
-        else Sim.station(M.st, M.sel, X, Y, k);
+        else {
+          M.sel.ordered = null;
+          M.sel.stationed = { x:X, y:Y, band:k };
+          Sim.station(M.st, M.sel, X, Y, k);
+          M.st.log('rt', `<b>${M.sel.id} ${M.st.L.leader}</b> \u2014 ` +
+            `taking station, ${k === 'high' ? 'up top' : k === 'low' ? 'underneath' : 'level'}.`);
+        }
       });
     },
 
@@ -12232,6 +12292,180 @@ UI.mapfight = (function(){
       });
     },
 
+    /* What you can say to one man over the R/T. */
+    ORDERS: [
+      { id:'press',  say:'Press home your attack',
+        note:'Get in close and stay with him.' },
+      { id:'break',  say:'Break, break!',
+        note:'Get out of it now, whatever he is doing.' },
+      { id:'home',   say:'Return to base',
+        note:'He is finished for the day.' },
+      { id:'height', say:'Keep your height',
+        note:'Do not follow them down. Height is everything.' },
+      { id:'reform', say:'Re-form on me',
+        note:'Back to the section and stop wandering about.' },
+      { id:'save',   say:'Watch your ammunition',
+        note:'Short bursts. He will need it later.' }
+    ],
+
+    /* Whether the order is heard, and whether it is obeyed. */
+    orderChance(a, sec){
+      const st = M.st;
+      // Being heard: the wireless, the noise, and how far he has strayed.
+      let heard = 0.62 + (sec.compMod || 0) + (a.mods && a.mods.vhf ? 0.12 : 0);
+      if (a.engaged) heard -= 0.18;
+      // Being obeyed: a steady, experienced man does as he is told; a
+      // frightened one with somebody behind him does not hear anything.
+      let obey = 0.30 + (a.nerve / 200) + (a.exp / 260);
+      // What Group thinks of you is what the squadron thinks of you.
+      obey += ((Season.s && Season.s.standing != null ? Season.s.standing : 50) - 50) / 260;
+      if (a.defending > 0) obey -= 0.30;
+      if (a.hurt) obey -= 0.12;
+      return clamp(heard, 0.1, 0.97) * clamp(obey, 0.05, 0.95);
+    },
+
+    orderMan(a, sec){
+      if (M.sheet || !Sim.live(a)) return;
+      const chance = M.orderChance(a, sec);
+      const odds = chance > 0.62 ? 'He is listening.'
+                 : chance > 0.42 ? 'He may not hear you.'
+                 : 'He has his hands full. He probably will not hear you at all.';
+      M.sheet_(a.call + ' \u2014 ' + (a.name || ''),
+        M.ORDERS.map(o => ({ k:o.id, t:'\u201c' + o.say + '\u201d', w:o.note })),
+        `<div class="mfcmp"><b>${odds}</b></div>`,
+        k => M.sendOrder(a, sec, k));
+    },
+
+    sendOrder(a, sec, kind){
+      const st = M.st;
+      const o = M.ORDERS.find(x => x.id === kind);
+      st.log('rt', `<b>${st.L.leader}</b> \u2014 ${a.call}, ${o.say.toLowerCase()}.`);
+      a.ordering = 2.2;
+      // He may simply not have heard it.
+      if (st.rng() > M.orderChance(a, sec)){
+        setTimeout(() => {
+          if (!Sim.live(a)) return;
+          st.log('nar', `${a.call} ${st.rng() < 0.5
+            ? 'does not answer.' : 'has not heard, or is not listening.'}`);
+        }, 700);
+        return;
+      }
+      st.log('rt', `<b>${a.call}</b> \u2014 ${st.rng() < 0.5 ? 'understood.' : 'right you are.'}`);
+      switch (kind){
+        case 'press':  a.pressOrder = 1; a.homing = false; break;
+        case 'break':  a.breaking = 2.2; a.target = null; a.phase = null; break;
+        case 'home':   a.homing = true; a.target = null; a.phase = null; break;
+        case 'height': a.holdHeight = 1; break;
+        case 'reform': a.phase = null; a.target = null; a.rejoin = 1; break;
+        case 'save':   a.spare = 1; break;
+      }
+    },
+
+    /* ---- the squadron, along the bottom ---- */
+    men(){
+      const st = M.st, box = $('mfmen');
+      if (!box) return;
+      const all = st.secs.flatMap(sc => sc.men.map(a => ({ a, sec: sc })));
+
+      if (!M.menDom || M.menDom.n !== all.length){
+        box.innerHTML = '';
+        M.menDom = { n: all.length, rows: [] };
+        for (const { a, sec } of all){
+          const row = document.createElement('div');
+          row.className = 'mfman';
+          row.innerHTML = `<span class="mn">${a.name || a.call}</span>` +
+            `<canvas class="mac" width="120" height="34"></canvas>` +
+            `<span class="mst"></span>` +
+            `<button class="mrt" title="A word with him">R/T</button>`;
+          // The card picks his section, and the map is where you send it.
+          row.onclick = (e) => {
+            if (e && e.target && e.target.classList &&
+                e.target.classList.contains('mrt')) return;
+            M.pick(sec);
+          };
+          const rt = row.querySelector('.mrt');
+          if (rt) rt.onclick = (e) => { if (e && e.stopPropagation) e.stopPropagation();
+                                        M.orderMan(a, sec); };
+          box.appendChild(row);
+          M.menDom.rows.push({ a, sec, row,
+            cv: row.querySelector('.mac'), st: row.querySelector('.mst') });
+        }
+      }
+
+      for (const r of M.menDom.rows) M.drawMan(r);
+    },
+
+    /* One man's aeroplane, and the state of it. */
+    drawMan(r){
+      const a = r.a, st = M.st;
+      const g = r.cv.getContext('2d');
+      const W = r.cv.width, H = r.cv.height;
+      g.clearRect(0, 0, W, H);
+
+      const dead = !Sim.live(a);
+      const hurt = a.hurt;
+      const firing = a.gunTime > 0;
+      const beingHit = a.hitFx > 0;
+
+      // The aeroplane. Gone men are a bare outline; the rest are tinted by
+      // how they are faring.
+      const art = MB.ART[a.ac];
+      const tint = dead ? 'mineHurt' : beingHit ? 'hit' : hurt ? 'mineHurt' : 'mine';
+      if (READY && SPRITE[a.ac] && art){
+        const w = Math.min(W - 34, 74);
+        const h = w * art.h / art.w;
+        g.save();
+        g.globalAlpha = dead ? 0.18 : 1;
+        g.translate(W / 2, H / 2);
+        g.rotate(-Math.PI / 2);          // nose to the right
+        g.drawImage(SPRITE[a.ac][tint], -w / 2, -h / 2, w, h);
+        g.restore();
+      }
+
+      if (!dead){
+        // Damage, as it accumulates: a growing bite out of the aeroplane.
+        const dmg = clamp((a.hits || 0) / 3.2, 0, 1);
+        if (dmg > 0.02){
+          g.save();
+          g.globalAlpha = 0.75;
+          g.strokeStyle = dmg > 0.6 ? '#ff4133' : '#ff9440';
+          g.lineWidth = 2;
+          g.beginPath();
+          g.moveTo(W / 2 + 8, H / 2 + 2);
+          for (let i = 0; i < Math.round(dmg * 5) + 1; i++)
+            g.lineTo(W / 2 + 12 + i * 5, H / 2 + (i % 2 ? -4 : 6));
+          g.stroke();
+          g.restore();
+        }
+        if (firing){
+          g.save();
+          g.strokeStyle = 'rgba(255,224,150,.95)'; g.lineWidth = 2.4;
+          g.beginPath(); g.moveTo(W / 2 + 34, H / 2); g.lineTo(W / 2 + 52, H / 2); g.stroke();
+          g.restore();
+        }
+        if (beingHit){
+          g.save();
+          g.strokeStyle = 'rgba(255,90,70,.95)'; g.lineWidth = 2.4;
+          g.beginPath(); g.moveTo(W / 2 - 34, H / 2 - 6); g.lineTo(W / 2 - 52, H / 2 - 12); g.stroke();
+          g.restore();
+        }
+      }
+
+      // What he is doing, in as few words as it takes.
+      const word = dead ? (a.out || 'gone')
+        : a.homing ? 'going home'
+        : firing ? 'firing'
+        : a.phase === 'run' ? 'going in'
+        : a.phase === 'setup' ? 'getting into position'
+        : a.phase === 'recover' ? 'breaking away'
+        : a.defending > 0 ? 'being attacked'
+        : a.ammo <= 0.4 ? 'out of ammunition'
+        : 'with the section';
+      r.st.textContent = word;
+      r.row.className = 'mfman' + (dead ? ' gone' : '') + (hurt ? ' hurt' : '') +
+        (a.ordering > 0 ? ' ordered' : '') + (M.sel === r.sec ? ' picked' : '');
+    },
+
     /* ---- the reports panel. The pilot decides; you find out. ---- */
     alerts(){
       const st = M.st, box = $('mfalerts');
@@ -12256,18 +12490,27 @@ UI.mapfight = (function(){
       $('mfup').textContent = up + ' still up';
     },
 
-    ticker(){
-      const st = M.st;
-      if (st.feed.length === M.tickN) return;
-      const box = $('mfticker');
+    /* The R/T, over the map where it is happening. Three at a time, and they
+       fade: a running column of it is a chat window, not a wireless. */
+    calls(){
+      const st = M.st, box = $('mfcalls');
+      if (!box) return;
       for (; M.tickN < st.feed.length; M.tickN++){
         const f = st.feed[M.tickN];
+        if (f.cls === 'nar' && st.rng() < 0.4) continue;   // keep it thin
         const p = document.createElement('p');
-        p.className = 'mf' + f.cls; p.innerHTML = f.html;
+        p.className = 'mfcall mf' + f.cls;
+        p.innerHTML = f.html;
+        p.dataset.born = String(st.t);
         box.appendChild(p);
       }
-      while (box.children.length > 60) box.removeChild(box.firstChild);
-      box.scrollTop = box.scrollHeight;
+      while (box.children.length > 4 && box.firstChild && box.firstChild.remove)
+        box.firstChild.remove();
+      for (const el of [...box.children]){
+        const age = st.t - parseFloat(el.dataset.born || '0');
+        if (age > 7){ el.remove(); continue; }
+        el.style.opacity = String(clamp(1 - (age - 4) / 3, 0, 1));
+      }
     },
 
     /* ---- hand the fight back to the campaign ---- */
@@ -12290,7 +12533,7 @@ UI.mapfight = (function(){
       const t0 = performance.now();
       const hold = now => {
         M.last = now;
-        M.draw(); M.alerts(); M.ticker();
+        M.draw(); M.men(); M.calls();
         if (now - t0 < 2200){ M.raf = requestAnimationFrame(hold); return; }
         const cb = M.done;
         M.close();
